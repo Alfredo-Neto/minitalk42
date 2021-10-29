@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/29 02:47:06 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/29 03:07:59 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include<strings.h>
 #include<unistd.h>
 
-static char g_done;
+static int g_done;
 
 static void send_str(int pid, const char *str)
 {
