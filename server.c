@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/29 02:41:23 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/29 02:46:45 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void sig_handler(int signal, siginfo_t *siginfo, void *context)
 {
     printf("Sinal recebido! Confirmando para client [PID]: %d\n", siginfo->si_pid);
 	kill(siginfo->si_pid, SIGUSR1);
-    exit(EXIT_SUCCESS);
 	(void)signal;
 	(void)context;
 }
