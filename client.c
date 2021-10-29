@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/28 22:45:48 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/29 01:54:52 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,17 @@
 
 static char g_done;
 
-void send_str(int pid, const char *str)
+static void send_str(int pid, const char *str)
 {
+	printf("Sinal enviado!\n");
 	kill(pid, SIGUSR1);
 	(void)str;
 }
 
-void sig_handler(int signal)
+static void sig_handler(int signal)
 {
-	printf("Recebi o sinal: %d\n", signal);
 	g_done = 1;
+	(void)signal;
 }
 
 int main(int argc, char const *argv[])
@@ -41,6 +42,7 @@ int main(int argc, char const *argv[])
 	if (sigaction(SIGUSR1, &action, NULL))
 		exit(EXIT_FAILURE);
 	pid = atoi(argv[1]);
+	printf("PID do client: %d\n", getpid());
 	send_str(pid, argv[2]);
 	return (EXIT_SUCCESS);
 }
