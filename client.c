@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/29 03:07:59 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/29 03:23:43 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ static void send_str(int pid, const char *str)
 {
 	printf("Sinal enviado!\n");
 	kill(pid, SIGUSR1);
-	while (g_done == 0)
-		;
-	g_done = 0;
 	(void)str;
 }
 
