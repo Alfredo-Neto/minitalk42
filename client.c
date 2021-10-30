@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/30 04:52:23 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/30 04:58:58 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,11 @@ void process_str(int pid, const char *str)
 {
 	int bit;
 	int count;
+	int index;
 
-	while (*str)
-	{
+	index = 0;
+	while (str[index++])
 		send_signal(bit, pid, str);
-		str++;
-	}
 	count = 8;
 	while (count--)
 	{
