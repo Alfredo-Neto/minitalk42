@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/30 04:58:58 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/30 05:08:20 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 #include<strings.h>
 #include<unistd.h>
 
-static int g_done;
+static int	g_done;
 
-void wait_server_response()
+void	wait_server_response(void)
 {
 	while (g_done == 0)
 		;
 	g_done = 0;
 }
 
-void send_signal(int bit, int pid, const char *str)
+void	send_signal(int bit, int pid, const char *str)
 {
-	int count;
-	
+	int	count;
+
 	count = 1 << 7;
 	while (count)
 	{
@@ -48,11 +48,11 @@ void send_signal(int bit, int pid, const char *str)
 	}
 }
 
-void process_str(int pid, const char *str)
+void	process_str(int pid, const char *str)
 {
-	int bit;
-	int count;
-	int index;
+	int	bit;
+	int	count;
+	int	index;
 
 	index = 0;
 	while (str[index++])
@@ -61,21 +61,22 @@ void process_str(int pid, const char *str)
 	while (count--)
 	{
 		if (kill(pid, SIGUSR2))
-				exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		wait_server_response();
 	}
 }
- 
-void sig_handler(int signal)
+
+void	sig_handler(int signal)
 {
 	g_done = 1;
 	(void)signal;
 }
 
-int main(int argc, char const *argv[])
+int	main(int argc, char const *argv[])
 {
-	struct sigaction action;
-	int pid;
+	struct sigaction	action;
+	int					pid;
+
 	if (argc != 3)
 		exit(EXIT_FAILURE);
 	bzero(&action, sizeof(struct sigaction));
