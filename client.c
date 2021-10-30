@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/30 02:19:53 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/30 04:52:23 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,49 +18,56 @@
 
 static int g_done;
 
-static void wait_server_response()
+void wait_server_response()
 {
 	while (g_done == 0)
 		;
 	g_done = 0;
 }
 
-static void put_null_byte(int pid)
+void send_signal(int bit, int pid, const char *str)
 {
-	size_t count;
+	int count;
 	
-	count = 8;
-	while (count--)
+	count = 1 << 7;
+	while (count)
 	{
-		kill(pid, SIGUSR2);
+		bit = *str & count;
+		if (bit)
+		{
+			if (kill(pid, SIGUSR1))
+				exit(EXIT_FAILURE);
+		}
+		else
+		{
+			if (kill(pid, SIGUSR2))
+				exit(EXIT_FAILURE);
+		}
 		wait_server_response();
+		count >>= 1;
 	}
 }
 
-static void send_bit(int pid, const char *str)
+void process_str(int pid, const char *str)
 {
-	static int bit;
-	size_t count;
+	int bit;
+	int count;
 
 	while (*str)
 	{
-		count = 1 << 7;
-		while (count)
-		{
-			bit = *str & count;
-			if (bit)
-				kill(pid, SIGUSR1);
-			else
-				kill(pid, SIGUSR2);
-			wait_server_response();
-			count >>= 1;
-		}
+		send_signal(bit, pid, str);
 		str++;
 	}
-	put_null_byte(pid);
+	count = 8;
+	while (count--)
+	{
+		if (kill(pid, SIGUSR2))
+				exit(EXIT_FAILURE);
+		wait_server_response();
+	}
 }
-
-static void sig_handler(int signal)
+ 
+void sig_handler(int signal)
 {
 	g_done = 1;
 	(void)signal;
@@ -77,7 +84,6 @@ int main(int argc, char const *argv[])
 	if (sigaction(SIGUSR1, &action, NULL))
 		exit(EXIT_FAILURE);
 	pid = atoi(argv[1]);
-	printf("PID do client: %d\n", getpid());
-	send_bit(pid, argv[2]);
+	process_str(pid, argv[2]);
 	return (EXIT_SUCCESS);
 }
