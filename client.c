@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/29 18:53:06 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/30 02:19:53 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,46 @@
 
 static int g_done;
 
-static void send_bit(int pid, const char *str)
+static void wait_server_response()
 {
-	printf("Sinal enviado!\n");
-	kill(pid, SIGUSR1);
 	while (g_done == 0)
 		;
 	g_done = 0;
-	(void)str;
+}
+
+static void put_null_byte(int pid)
+{
+	size_t count;
+	
+	count = 8;
+	while (count--)
+	{
+		kill(pid, SIGUSR2);
+		wait_server_response();
+	}
+}
+
+static void send_bit(int pid, const char *str)
+{
+	static int bit;
+	size_t count;
+
+	while (*str)
+	{
+		count = 1 << 7;
+		while (count)
+		{
+			bit = *str & count;
+			if (bit)
+				kill(pid, SIGUSR1);
+			else
+				kill(pid, SIGUSR2);
+			wait_server_response();
+			count >>= 1;
+		}
+		str++;
+	}
+	put_null_byte(pid);
 }
 
 static void sig_handler(int signal)
