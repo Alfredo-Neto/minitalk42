@@ -6,15 +6,13 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/30 05:08:20 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/30 05:17:26 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<signal.h>
-#include<stdio.h>
 #include<stdlib.h>
 #include<strings.h>
-#include<unistd.h>
 
 static int	g_done;
 
