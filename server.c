@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/30 22:35:31 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/31 01:05:39 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,27 @@
 #include<strings.h>
 #include<unistd.h>
 
+void print_array(int **arr_bits)
+{
+  while (*arr_bits)
+  {
+    printf("%d", *arr_bits);
+    arr_bits++;
+  }
+}
+
 void sig_handler(int signal, siginfo_t *siginfo, void *context)
 {
-    if (signal == SIGUSR1)
-      write(1, "1", 1);
-    if (signal == SIGUSR2)
-      write(1, "0", 1);
+    int bit;
+    static int *arr_bits;
+    static int index;
+
+    if (arr_bits == NULL)
+      arr_bits = calloc(16, sizeof(int));
+    bit = signal == SIGUSR1;
+    arr_bits[index++] = bit;
+    if (index == 8)
+      print_array(&arr_bits);
     kill(siginfo->si_pid, SIGUSR1);
 	(void)context;
 }
