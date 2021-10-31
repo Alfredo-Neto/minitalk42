@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/10/30 05:20:18 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/10/30 22:35:31 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include<stdlib.h>
 #include<strings.h>
 #include<unistd.h>
-
-static int count;
 
 void sig_handler(int signal, siginfo_t *siginfo, void *context)
 {
@@ -37,7 +35,7 @@ int save_actions(void){
     if (sigaction(SIGUSR1, &action, NULL))
         exit(EXIT_FAILURE);
     if (sigaction(SIGUSR2, &action, NULL))
-		exit(EXIT_FAILURE);
+		    exit(EXIT_FAILURE);
     return (0);
 }
     
