@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/04 01:25:57 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/04 02:04:28 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,11 @@ void sig_handler(int signal, siginfo_t *siginfo, void *context)
   if (arr_bits == NULL)
       arr_bits = calloc(1, sizeof(char));
   bit = signal == SIGUSR1;
-  if (index <= 8)
-  {
-      if (bit)
-          arr_bits[index] = '1';
-      else
-          arr_bits[index] = '0';
-      index++;
-  }
+  if (bit)
+      arr_bits[index] = '1';
+  else
+      arr_bits[index] = '0';
+  index++;
   if(index == 8)
   {
       handle_str(arr_bits);
