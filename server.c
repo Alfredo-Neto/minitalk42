@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/04 01:05:55 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/04 01:25:57 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@
 
 void handle_str(char *arr_bits)
 {
- 
+  printf("%s\n", arr_bits);
 }
 
 void sig_handler(int signal, siginfo_t *siginfo, void *context)
 {
-
   // TRANSFORMAR STRING DE BITS EM INT E CONVERTER PARA DECIMAL, QUE SERÁ PRINTADO COMO CHAR
-
   int bit;
   static char *arr_bits;
   static int index;
