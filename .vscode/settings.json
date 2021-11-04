@@ -3,6 +3,7 @@
         "signal.h": "c",
         "features.h": "c",
         "stdio.h": "c",
-        "strings.h": "c"
+        "strings.h": "c",
+        "stdlib.h": "c"
     }
 }
