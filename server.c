@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/04 02:04:28 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/04 22:06:05 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,36 @@
 
 void handle_str(char *arr_bits)
 {
-  printf("%s\n", arr_bits);
+  int binary;
+  
+  binary = 0;
+  printf("ARR_BITS: %s\n", arr_bits);
+  binary = atoi(arr_bits);
+  write(1, &binary, 1);
+  write(1, "\n", 1);
 }
 
 void sig_handler(int signal, siginfo_t *siginfo, void *context)
 {
   // TRANSFORMAR STRING DE BITS EM INT E CONVERTER PARA DECIMAL, QUE SERÁ PRINTADO COMO CHAR
   int bit;
-  static char *arr_bits;
+  char *arr_bits;
   static int index;
 
   if (arr_bits == NULL)
       arr_bits = calloc(1, sizeof(char));
   bit = signal == SIGUSR1;
   if (bit)
-      arr_bits[index] = '1';
+      arr_bits[index] = '1'; // arr_bits[] = string "01000001" => int 01000001 => decimal => 65 => %c = 'A'
   else
       arr_bits[index] = '0';
   index++;
   if(index == 8)
   {
-      handle_str(arr_bits);
-      free(arr_bits);
-      arr_bits = NULL;
-      index = 0;
+    handle_str(arr_bits);
+    free(arr_bits);
+    arr_bits = NULL;
+    index = 0;
   }
   kill(siginfo->si_pid, SIGUSR1);
   (void)context;
