@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/07 03:10:11 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/07 04:30:32 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,3 +107,4 @@ int main(void)
 // ADICIONAR HANDLE_STR E PUT_FIRST_CHAR NA LIBFT
 // MELHORAR A FUNÇÃO DE PRINT
 // IMPLEMENTAR FUNÇÃO PERSONALIZADA DE ERRO
+// AO FINALIZAR A INTEGRAÇÃO DA LIBFT E A PRINTF, APAGAR INCLUDES DESNECESSÁRIOS
