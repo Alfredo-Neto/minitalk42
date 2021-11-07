@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 16:51:30 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/06 23:33:57 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/07 00:14:50 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 char *print_str(char *str)
 {
-    printf("Message: %s\n\n", str);
+    printf("Message: \n%s\n\n", str);
     return (str);
 }

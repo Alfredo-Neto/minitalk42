@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/06 23:58:44 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/07 03:10:11 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,3 +97,13 @@ int main(void)
       pause();
   return (0);
 }
+
+// PROXIMAS TAREFAS:
+// VERIFICAR INTEGRAÇÃO COM LIBFT E PRINTF
+// VER LEAKS DE MEMÓRIA
+// TESTAR MAIS UMA VEZ
+// NORMINETTE
+// ESTUDAR O MINITALK DO VINICIUS
+// ADICIONAR HANDLE_STR E PUT_FIRST_CHAR NA LIBFT
+// MELHORAR A FUNÇÃO DE PRINT
+// IMPLEMENTAR FUNÇÃO PERSONALIZADA DE ERRO
