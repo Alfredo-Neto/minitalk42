@@ -6,13 +6,11 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/03 23:46:26 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/06 16:57:51 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<signal.h>
-#include<stdlib.h>
-#include<strings.h>
+#include "minitalk.h"
 
 static int	g_done;
 

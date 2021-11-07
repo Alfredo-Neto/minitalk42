@@ -6,49 +6,71 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/04 22:06:05 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/06 23:58:44 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<signal.h>
-#include<stdio.h>
-#include<stdlib.h>
-#include<strings.h>
-#include<unistd.h>
-#include<string.h>
+#include "minitalk.h"
 
-void handle_str(char *arr_bits)
+char *put_first_char(char c)
 {
-  int binary;
+  char *add;
+  int index;
   
-  binary = 0;
-  printf("ARR_BITS: %s\n", arr_bits);
-  binary = atoi(arr_bits);
-  write(1, &binary, 1);
-  write(1, "\n", 1);
+  index = 0;
+  add = (char *)malloc(sizeof(char) + 1);
+  if (!add)
+    return (NULL);
+  add[index++] = c;
+  add[index] = '\0';
+  return (add);
+}
+
+char *handle_str(char *str, char c)
+{
+  int index;
+  char *add;
+  
+  index = 0;
+  if(!str)
+    return (put_first_char(c));
+  if (!c)
+    return (NULL);
+  add = (char *)malloc(sizeof(char) * (strlen(str) + 2));
+  if (!add)
+    return (NULL);
+  while (str[index])
+  {
+    add[index] = str[index];
+    index++;
+  }
+  add[index++] = c;
+  add[index] = '\0';
+  return (add);
 }
 
 void sig_handler(int signal, siginfo_t *siginfo, void *context)
 {
-  // TRANSFORMAR STRING DE BITS EM INT E CONVERTER PARA DECIMAL, QUE SERÁ PRINTADO COMO CHAR
-  int bit;
-  char *arr_bits;
-  static int index;
+  static int bits;
+  static char current = 0xFF; // 01000001 = 65 = 'A'
+  static char *output;
 
-  if (arr_bits == NULL)
-      arr_bits = calloc(1, sizeof(char));
-  bit = signal == SIGUSR1;
-  if (bit)
-      arr_bits[index] = '1'; // arr_bits[] = string "01000001" => int 01000001 => decimal => 65 => %c = 'A'
-  else
-      arr_bits[index] = '0';
-  index++;
-  if(index == 8)
+  if (signal == SIGUSR1) // 1
+    current |= 0x80 >> bits;
+  else if (signal == SIGUSR2) // 0
+    current ^= 0x80 >> bits;
+  if (++bits == 8)
   {
-    handle_str(arr_bits);
-    free(arr_bits);
-    arr_bits = NULL;
-    index = 0;
+    if (current)
+      output = handle_str(output, current);
+    else
+    {
+      output = print_str(output);
+      free(output);
+      output = NULL;
+    }
+    current = 0xFF;
+    bits = 0;
   }
   kill(siginfo->si_pid, SIGUSR1);
   (void)context;
