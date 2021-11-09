@@ -49,10 +49,8 @@ void	process_str(int pid, const char *str)
 {
 	int	bit;
 	int	count;
-	int	index;
 
 	bit = 0;
-	index = 0;
 	while (*str)
 	{
 		send_signal(bit, pid, str);
