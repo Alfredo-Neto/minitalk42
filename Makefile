@@ -6,8 +6,6 @@ SOURCE_DIR = src
 LIBFT_DIR = libraries/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SOURCE_FILES = server.c client.c
-
 INCLUDES = includes
 INCLUDES := $(addprefix -I, $(INCLUDES))
 
