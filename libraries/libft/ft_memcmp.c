@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_utils.c                                     :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 16:51:30 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/07 04:20:57 by ade-agui         ###   ########.fr       */
+/*   Created: 2021/05/24 16:39:23 by ade-agui          #+#    #+#             */
+/*   Updated: 2021/05/25 21:15:00 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-char *print_str(char *str)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-    printf("\n%s\n\n", str);
-    return (NULL);
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+		i++;
+	}
+	return (0);
 }

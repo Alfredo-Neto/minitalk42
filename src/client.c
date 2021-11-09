@@ -6,11 +6,12 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/06 16:57:51 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/09 01:39:46 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include<signal.h>
+#include "libft.h"
 
 static int	g_done;
 
@@ -50,6 +51,7 @@ void	process_str(int pid, const char *str)
 	int	count;
 	int	index;
 
+	bit = 0;
 	index = 0;
 	while (*str)
 	{
@@ -78,7 +80,7 @@ int	main(int argc, char const *argv[])
 
 	if (argc != 3)
 		exit(EXIT_FAILURE);
-	bzero(&action, sizeof(struct sigaction));
+	ft_bzero(&action, sizeof(struct sigaction));
 	action.sa_handler = sig_handler;
 	if (sigaction(SIGUSR1, &action, NULL))
 		exit(EXIT_FAILURE);

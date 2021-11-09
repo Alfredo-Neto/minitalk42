@@ -6,47 +6,17 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/07 04:32:33 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/09 01:54:27 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include<signal.h>
+#include "libft.h"
 
-char *put_first_char(char c)
+char *print_str(char *str)
 {
-  char *add;
-  int index;
-  
-  index = 0;
-  add = (char *)malloc(sizeof(char) + 1);
-  if (!add)
+    ft_putstr_fd(str, 1);
     return (NULL);
-  add[index++] = c;
-  add[index] = '\0';
-  return (add);
-}
-
-char *handle_str(char *str, char c)
-{
-  int index;
-  char *add;
-  
-  index = 0;
-  if(!str)
-    return (put_first_char(c));
-  if (!c)
-    return (NULL);
-  add = (char *)malloc(sizeof(char) * (strlen(str) + 2));
-  if (!add)
-    return (NULL);
-  while (str[index])
-  {
-    add[index] = str[index];
-    index++;
-  }
-  add[index++] = c;
-  add[index] = '\0';
-  return (add);
 }
 
 void sig_handler(int signal, siginfo_t *siginfo, void *context)
@@ -62,7 +32,7 @@ void sig_handler(int signal, siginfo_t *siginfo, void *context)
   if (++bits == 8)
   {
     if (current)
-      output = handle_str(output, current);
+      output = ft_strappendchar(output, current);
     else
     {
       output = print_str(output);
@@ -78,7 +48,7 @@ void sig_handler(int signal, siginfo_t *siginfo, void *context)
 
 int save_actions(void){
   struct sigaction action;
-  bzero(&action, sizeof(struct sigaction));
+  ft_bzero(&action, sizeof(struct sigaction));
   sigemptyset(&action.sa_mask);
   action.sa_sigaction = sig_handler;
   action.sa_flags = SA_SIGINFO;
@@ -91,21 +61,14 @@ int save_actions(void){
 
 int main(void)
 {
-  printf("Server running... [PID]: %d\n", getpid());
+  char *pid;
+  
+  pid = ft_itoa(getpid());
+  ft_putstr_fd("Server running... [PID]: ", 1);
+  ft_putstr_fd(pid, 1);
+  ft_putstr_fd("\n", 1);
   save_actions();
   while (1)
       pause();
   return (0);
 }
-
-// PROXIMAS TAREFAS:
-// VERIFICAR INTEGRAÇÃO COM LIBFT E PRINTF
-// VER LEAKS DE MEMÓRIA
-// TESTAR MAIS UMA VEZ
-// NORMINETTE
-// ADICIONAR HANDLE_STR E PUT_FIRST_CHAR NA LIBFT
-// MELHORAR A FUNÇÃO DE PRINT
-// IMPLEMENTAR FUNÇÃO PERSONALIZADA DE ERRO
-// AO FINALIZAR A INTEGRAÇÃO DA LIBFT E A PRINTF, APAGAR INCLUDES DESNECESSÁRIOS
-// TESTAR NO 42 WORKSPACES
-// INICIAR AVALIAÇÕES

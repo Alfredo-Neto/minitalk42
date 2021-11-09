@@ -4,6 +4,7 @@
         "features.h": "c",
         "stdio.h": "c",
         "strings.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "libft.h": "c"
     }
 }
