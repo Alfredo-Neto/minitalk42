@@ -3,7 +3,7 @@ SERVER = server
 
 SOURCE_DIR = src
 
-LIBFT_DIR = libraries/libft
+LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 INCLUDES = includes
@@ -21,7 +21,7 @@ all: $(LIBFT) $(CLIENT) $(SERVER)
 bonus: all
 
 %: $(SOURCE_DIR)/%.c
-	$(CC) $(CFLAGS) $(POSIX_FLAGS) $(INCLUDES) $< $(LIBFLAGS) -o $@
+	$(CC) $(CFLAGS) $(POSIX_FLAGS) $< $(INCLUDES) $(LIBFLAGS) -o $@
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
