@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:51:45 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/09 01:39:46 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/09 21:55:21 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	wait_server_response(void)
 	g_done = 0;
 }
 
-void	send_signal(int bit, int pid, const char *str)
+void	send_signal(int pid, const char *str)
 {
+	int	bit;
 	int	count;
 
 	count = 1 << 7;
@@ -47,13 +48,11 @@ void	send_signal(int bit, int pid, const char *str)
 
 void	process_str(int pid, const char *str)
 {
-	int	bit;
 	int	count;
 
-	bit = 0;
 	while (*str)
 	{
-		send_signal(bit, pid, str);
+		send_signal(pid, str);
 		str++;
 	}
 	count = 8;
