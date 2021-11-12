@@ -6,7 +6,7 @@
 /*   By: ade-agui <ade-agui@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 23:13:31 by ade-agui          #+#    #+#             */
-/*   Updated: 2021/11/09 02:11:38 by ade-agui         ###   ########.fr       */
+/*   Updated: 2021/11/12 04:32:50 by ade-agui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 char	*print_str(char *str)
 {
 	ft_putstr_fd(str, 1);
+	ft_putstr_fd("\n", 1);
 	return (NULL);
 }
 
